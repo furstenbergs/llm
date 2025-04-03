@@ -4,7 +4,7 @@ terraform {
     organization = "Furstenberg-Consulting"
 
     workspaces {
-      name = "github-actions"
+      name = "hetzner-nue"
     }
   }
 }
