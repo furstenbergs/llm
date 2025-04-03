@@ -5,6 +5,11 @@ on:
     branches: [ "main" ]
   pull_request:
   workflow_dispatch:
+    inputs:
+      allow_destroy:
+        description: "Set to 'true' to allow Terraform destroy"
+        required: false
+        default: "false"
 
 permissions:
   contents: read
@@ -67,7 +72,7 @@ jobs:
     environment: production
 
     needs: terraform
-    if: github.event_name == 'workflow_dispatch'  # Only run when manually triggered
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.allow_destroy == 'true'  # Only run when allow_destroy is explicitly set to "true"
 
     defaults:
       run:
@@ -84,10 +89,10 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: terraform/hetzner/nue/
+      working-directory: terraform/llm/hcloud/nbg1
 
     - name: Terraform Destroy
       run: terraform destroy -auto-approve -input=false
-      working-directory: terraform/hetzner/nue/
+      working-directory: terraform/llm/hcloud/nbg1
       env:
         TF_VAR_hcloud_token: ${{ secrets.HCLOUD_TOKEN }}
