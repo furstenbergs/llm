@@ -3,7 +3,7 @@ terraform {
     organization = "Furstenberg-Consulting"
 
     workspaces {
-      name = "hcloud-nbg1"
+      name = "llm-hcloud-nbg1"
     }
   }
 }
