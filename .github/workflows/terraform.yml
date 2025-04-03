@@ -20,7 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
 
-    if: github.event.inputs.allow_destroy != 'true' # Skip if allow_destroy=true
+    # Run if NOT a manual destroy request
+    if: github.event_name != 'workflow_dispatch' || github.event.inputs.allow_destroy != 'true'
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -73,8 +74,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
 
-    needs: terraform
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.allow_destroy == 'true'  # Only run when allow_destroy is explicitly set to "true"
+    # Run only if manually triggered with allow_destroy=true
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.allow_destroy == 'true'
 
     defaults:
       run:
