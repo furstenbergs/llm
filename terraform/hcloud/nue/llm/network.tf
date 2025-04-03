@@ -4,15 +4,14 @@ resource "hcloud_network" "llm_private_network" {
 }
 
 resource "hcloud_network_subnet" "llm_private_subnet" {
-  network_id   = hcloud_network.llm-private-network.id
+  network_id   = hcloud_network.llm_private_network.id
   type         = "cloud"
   network_zone = var.network_zone
-  ip_range     = var.cloud_subnet
+  ip_range     = var.llm_private_subnet
 }
 
-
 resource "hcloud_firewall" "llm_public_fw" {
-  name = "portals-public-firewall"
+  name = "llm-public-firewall"
   rule {
     direction = "in"
     protocol  = "tcp"
