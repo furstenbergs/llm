@@ -1,6 +1,5 @@
 terraform {
   cloud {
-
     organization = "Furstenberg-Consulting"
 
     workspaces {
