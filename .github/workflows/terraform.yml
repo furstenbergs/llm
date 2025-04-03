@@ -34,21 +34,21 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
-      working-directory: terraform/hcloud/nb1/llm/
+      working-directory: terraform/hcloud/nbg1/llm/
 
     - name: Terraform Format Fix  # Fixes formatting automatically
       run: terraform fmt -recursive
-      working-directory: terraform/hcloud/nb1/llm/
+      working-directory: terraform/hcloud/nbg1/llm/
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
-      working-directory: terraform/hcloud/nb1/llm/
+      working-directory: terraform/hcloud/nbg1/llm/
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
-      working-directory: terraform/hcloud/nb1/llm/
+      working-directory: terraform/hcloud/nbg1/llm/
       env:
         TF_VAR_hcloud_token: ${{ secrets.HCLOUD_TOKEN }}
 
@@ -57,6 +57,6 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
       run: terraform apply -auto-approve -input=false
-      working-directory: terraform/hcloud/nb1/llm/
+      working-directory: terraform/hcloud/nbg1/llm/
       env:
         TF_VAR_hcloud_token: ${{ secrets.HCLOUD_TOKEN }}

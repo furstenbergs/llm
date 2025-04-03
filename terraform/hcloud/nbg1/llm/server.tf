@@ -3,7 +3,7 @@ resource "hcloud_ssh_key" "stefan" {
   public_key = file("./files/ssh/stefan.pub")
 }
 
-resource "hcloud_server" "portals_firewall_az1" {
+resource "hcloud_server" "llm_001_az1" {
     name                  = "${var.az1}-llm.${var.domain}"
     image                 = var.os_image
     server_type           = var.ll_server_type

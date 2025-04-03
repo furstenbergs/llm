@@ -15,7 +15,7 @@ variable "domain" {
 }
 
 variable "az1" {
-  default = "nb1"
+  default = "nbg1"
 }
 
 variable "os_image" {
