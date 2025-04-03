@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
 
+    if: github.event.inputs.allow_destroy != 'true' # Skip if allow_destroy=true
+
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
