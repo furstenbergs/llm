@@ -5,7 +5,7 @@ resource "hcloud_ssh_key" "stefan" {
 
 resource "hcloud_server" "portals_firewall_az1" {
     name                  = "${var.az1}-llm.${var.domain}"
-    image                 = var.os_iamge
+    image                 = var.os_image
     server_type           = var.ll_server_type
     location              = var.az1
     ssh_keys              = [hcloud_ssh_key.stefan.id]
