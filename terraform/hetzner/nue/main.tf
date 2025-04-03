@@ -1,12 +1,12 @@
-terraform { 
-  cloud { 
-    
-    organization = "Furstenberg-Consulting" 
+terraform {
+  cloud {
 
-    workspaces { 
-      name = "github-actions" 
-    } 
-  } 
+    organization = "Furstenberg-Consulting"
+
+    workspaces {
+      name = "github-actions"
+    }
+  }
 }
 
 # An example resource that does nothing.
