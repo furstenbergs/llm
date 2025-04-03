@@ -1,0 +1,20 @@
+#cloud-config
+users:
+  - name: devops
+    groups: users, admin
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDK97D6QOS9sxcQb4wLqlDbh6otKnodoZPsiqW0nZkR/WK0rqz04du0twL+PQdKk1JfHfqvEng+8HV1YvtNuzdMD7eMQ1CKfmF+YGI64txkknP3A0csQx2A4Y4SFcemnktYMn1xmEqCNQ681bHalgeMcEAo32e1ibyseaxzJ2sCQ7PuYDXpWqGhU6tE5osnus3CW1yZ5ZLQvftcwmpfkzVpkpQKBzfPhcTeJvmAYY+U5FfUlgmMkMzwrldNVgK5VUXfTwEj2ecmMmXUHjXSMsCcbCbKZHm4CZmYeBcyla8NpiXWJjZiNlNFpIqlk8w+sp7ek0YkyZ/t8rUnrHBShIFzEejKKjNR7/JvzJbZchH9F6GI7S7RYDvqHxB7aUxwWBUv2kAhX4Avf7LFFFhCjPV+OFVWUrg34hIOcXSU/R2hhg+XC4Z4ffJzXBaUYim4VETyXs6yaKieELMEzncW8JntHs0mFIcTLWOZv000l+oql3fnwCn49OCZew3FQMdf7qqe77aN+PAepoIlRy5b6N4RtbBjLYV9cF0aKrYPE/WLlXW3WEGRoN4dtHqvtadUz+SLNBhdUedecmXeJYxDVTlTJmG74XAdlVDUWp2kBnz6ZSNBNaw3h7j5KPhvvcRD8M17084v1t5y+K5AeMcGAUttSQ/zfLYxqMCSrAXA0guLeQ==
+      
+runcmd:
+  - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config
+  - sed -i -e '/^PasswordAuthentication/s/^.*$/PasswordAuthentication no/' /etc/ssh/sshd_config
+  - sed -i -e '/^X11Forwarding/s/^.*$/X11Forwarding no/' /etc/ssh/sshd_config
+  - sed -i -e '/^#MaxAuthTries/s/^.*$/MaxAuthTries 2/' /etc/ssh/sshd_config
+  - sed -i -e '/^#AllowTcpForwarding/s/^.*$/AllowTcpForwarding no/' /etc/ssh/sshd_config
+  - sed -i -e '/^#AllowAgentForwarding/s/^.*$/AllowAgentForwarding no/' /etc/ssh/sshd_config
+  - sed -i -e '/^#AuthorizedKeysFile/s/^.*$/AuthorizedKeysFile .ssh\/authorized_keys/' /etc/ssh/sshd_config
+  - sed -i '$a AllowUsers devops' /etc/ssh/sshd_config
+  - netplan apply
+  - [ systemctl, restart, ssh.service ]
