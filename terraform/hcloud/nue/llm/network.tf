@@ -20,4 +20,5 @@ resource "hcloud_firewall" "llm_public_fw" {
     source_ips = [
       "84.20.50.198/32" # Regus IP
     ]
+  }
 }
