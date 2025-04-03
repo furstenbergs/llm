@@ -7,10 +7,6 @@ terraform {
     }
 }
 
-module "hcloud" {
-  source = "../../modules/hcloud"
-}
-
 module "hcloud_network" {
   source = "../../modules/hcloud_network"
 
