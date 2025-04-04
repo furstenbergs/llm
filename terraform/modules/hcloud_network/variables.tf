@@ -26,11 +26,6 @@ variable "network_ip_range" {
   type        = string
 }
 
-variable "network_zone" {
-  description = "The network zone for the subnet."
-  type        = string
-}
-
 variable "subnet_ip_range" {
   description = "The IP range for the Hetzner subnet."
   type        = string
